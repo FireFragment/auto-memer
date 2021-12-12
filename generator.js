@@ -19,9 +19,6 @@ function showButton(id, text, textAnswerId) {
 
 // Called, when we found ourselves in dead-end
 function panic() {
-  console.log(changableQuestionsQueue);
-  console.log(changableQuestionsQueue[changableQuestionsQueue.length - 1]);
-  console.log(questions[changableQuestionsQueue[changableQuestionsQueue.length - 1]]);
   ask(questions[changableQuestionsQueue[changableQuestionsQueue.length - 1]]); // Ask the last question in changableQuestionsQueue.\
   changableQuestionsQueue.pop() // Remove the question we just asked
 }
@@ -72,6 +69,7 @@ function ask(question) {
     
   // Reset GUI
   els.input.style.display = "none"; // Hide textbox
+  els.input.value = ""; // Empty textbox
   els.buttons.innerHTML = ""; // Remove buttons
   
   // Show header
