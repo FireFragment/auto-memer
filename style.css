@@ -1,0 +1,15 @@
+#q-button-row * {
+  margin-right: 4px;
+  margin-left: 4px;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align:center;
+}
+
+main * {
+  margin-top: 8px;
+}
