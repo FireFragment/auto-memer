@@ -4,8 +4,7 @@ var changableQuestionsQueue = [];
 ask(questions.root); // Ask the first question
 
 function createMeme(data) {
-  // FIXME: Use memgen.link as URL when my PR gets accepted
-  els.result.src="http://localhost:5000/images/" + data.template + "/" + data.content.map(txt => textAnswers[txt]).join("/") + ".png";
+  els.result.src="http://api.memegen.link/images/" + data.template + "/" + data.content.map(txt => textAnswers[txt]).join("/") + ".png";
 }
 
 // Show a button in options row.
