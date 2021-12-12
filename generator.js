@@ -61,8 +61,6 @@ function ask(question) {
   if (question.type === qtype.random) {
     // We already tried all options and user's respones weren't good for making a meme
     changableQuestionsQueue = changableQuestionsQueue.concat(shuffle(question.options));
-    console.log(shuffle(question.options));
-    console.log(changableQuestionsQueue);
     panic();
     return;
   }
