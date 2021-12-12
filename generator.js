@@ -1,16 +1,11 @@
 var textAnswers = {}
 var changableQuestionsQueue = [];
 
-//createMeme({"panik1":0,"kalm":1,"panik2":2});
 ask(questions.root); // Ask the first question
 
 function createMeme(data) {
   // FIXME: Use memgen.link as URL when my PR gets accepted
   els.result.src="http://localhost:5000/images/" + data.template + "/" + data.content.map(txt => textAnswers[txt]).join("/") + ".png";
-  //window.location.href = els.result.src;
-  console.log(data);
-  console.log(data.content.map(txt => textAnswers[txt]));
-  console.log(data.content.map(txt => textAnswers[txt]).join("/"));
 }
 
 // Show a button in options row.
