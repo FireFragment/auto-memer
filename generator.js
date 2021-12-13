@@ -25,7 +25,10 @@ function showButton(id, text, textAnswerId) {
 
 // Called, when we found ourselves in dead-end
 function panic() {
-  ask(questions[changableQuestionsQueue[changableQuestionsQueue.length - 1]]); // Ask the last question in changableQuestionsQueue.\
+  if (changableQuestionsQueue.length == 0)
+    ask(questions.root);
+  else
+    ask(questions[changableQuestionsQueue[changableQuestionsQueue.length - 1]]); // Ask the last question in changableQuestionsQueue.\
   changableQuestionsQueue.pop() // Remove the question we just asked
 }
 
@@ -97,6 +100,5 @@ function ask(question) {
   if (question.type === qtype.text) {
     els.input.style.display = "inline";
     lastChangableQuestion = question;
-    changableQuestionsQueue.push(question.name);
   }
 }

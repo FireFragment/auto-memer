@@ -9,6 +9,11 @@ const textAnswersIds = {
 const questions = {
   root: { // The flow begins with `root`.
     name: "root",
+    type: qtype.random,
+    options: ["badEvent"]
+  },
+  badEvent: {
+    name: "badEvent",
     text: {
       "en": "What don't you like to happen?",
       "cs": "Co nemáš rád, když se stane?"
@@ -21,7 +26,7 @@ const questions = {
         teleport: ["possibleToCancel", "notSoBad"]
       }
     ]
-  },   
+  },
   possibleToCancel: { 
     name: "possibleToCancel",
     text: {
