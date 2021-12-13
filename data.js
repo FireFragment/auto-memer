@@ -129,7 +129,24 @@ const questions = {
     options: [
       {
         text: "OK",
+        teleport: ["isResolutionWorse"]
+      }
+    ]
+  },
+  isResolutionWorse: {
+    name: "isResolutionWorse",
+    text: {
+      "en": "From following options, what is worse?",
+      "cs": "Co z následujících možností je horší?"
+    },
+    options: [
+      {
+        text: textAnswersIds.badEventResolutionWrong,
         teleport: ["panikKalmPanik"]
+      },
+      {
+        text: textAnswersIds.badEvent,
+        teleport: "PANIC"
       }
     ]
   },
