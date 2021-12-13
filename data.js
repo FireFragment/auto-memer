@@ -18,18 +18,10 @@ const questions = {
     options: [
       {
         text: "OK",
-        teleport: "badEventResolution"
+        teleport: ["possibleToCancel", "notSoBad"]
       }
     ]
-  },  
-  badEventResolution: { 
-    name: "badEventResolution",
-    type: qtype.random,
-    options: [
-      "possibleToCancel",
-      "notSoBad"
-    ]
-  },  
+  },   
   possibleToCancel: { 
     name: "possibleToCancel",
     text: {
@@ -43,7 +35,7 @@ const questions = {
           "en": "Yes",
           "cs": "Ano"
         },
-        teleport: "howToCancel"
+        teleport: ["howToCancel"]
       },
       {
         text: {
@@ -65,7 +57,7 @@ const questions = {
     options: [
       {
         text: "OK",
-        teleport: "badEventResolutionAgainstYou"
+        teleport: ["badEventResolutionAgainstYou"]
       }
     ]
   },  
@@ -82,7 +74,7 @@ const questions = {
           "en": "Yes",
           "cs": "Ano"
         },
-        teleport: "howNotSoBad"
+        teleport: ["howNotSoBad"]
       },
       {
         text: "No",
@@ -101,7 +93,7 @@ const questions = {
     options: [
       {
         text: "OK",
-        teleport: "badEventResolutionAgainstYou"
+        teleport: ["badEventResolutionAgainstYou"]
       }
     ]
   },
@@ -118,7 +110,7 @@ const questions = {
           "en": "Yes",
           "cs": "Ano"
         },
-        teleport: "howBadEventResolutionAgainstYou"
+        teleport: ["howBadEventResolutionAgainstYou"]
       },
       {
         text: "No",
@@ -137,7 +129,7 @@ const questions = {
     options: [
       {
         text: "OK",
-        teleport: "panikKalmPanik"
+        teleport: ["panikKalmPanik"]
       }
     ]
   },

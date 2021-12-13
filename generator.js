@@ -3,6 +3,12 @@ var changableQuestionsQueue = [];
 
 ask(questions.root); // Ask the first question
 
+// Ask a random question from the array.
+function askRandomOf(arr) {
+  changableQuestionsQueue = changableQuestionsQueue.concat(shuffle(arr));
+  panic();
+};
+
 function createMeme(data) {
   els.result.src="http://api.memegen.link/images/" + data.template + "/" + data.content.map(txt => textAnswers[txt]).join("/") + ".png";
 }
@@ -25,14 +31,15 @@ function panic() {
 
 // Called, when button created by `showButton` clicked.
 function optClicked(teleport, textAnswerId) {
+  console.log(teleport);
   if (teleport === "PANIC") {
     panic();
     return;
   }
-  if (textAnswerId !== undefined) {
+  if (textAnswerId !== undefined) { // The question is textual
     textAnswers[textAnswerId] = els.input.value;
   }
-  ask(questions[teleport]);
+  askRandomOf(teleport);
 }
 
 // Convert the `text` item of questions to string
@@ -63,8 +70,7 @@ function ask(question) {
   // Eventually go to random option
   if (question.type === qtype.random) {
     // We already tried all options and user's respones weren't good for making a meme
-    changableQuestionsQueue = changableQuestionsQueue.concat(shuffle(question.options));
-    panic();
+    askRandomOf(question.options);
     return;
   }
   
