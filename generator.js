@@ -36,20 +36,26 @@ function optClicked(teleport, textAnswerId) {
 }
 
 // Convert the `text` item of questions to string
-function processArrString(arr) {
+function processString(str) {
+  var arr;
+  
+  switch (typeof(str)) {
+    case "string": return str;              // `str` is a string literal
+    case "number": return textAnswers[str]; // `str` is response to an earlier question
+    case "object": 
+      if (Array.isArray(str))
+        arr = str;
+      else                                  // `str` is translated to multiple languages
+        return processString(str[lang]);  
+      break;
+    default: console.error("str should not be type of " + typeof(str)); break;
+  }
+  
   var resultStr = "";
   arr.forEach(item => {
-    resultStr += processStringUnit(item);
+    resultStr += processString(item);
   });
   return resultStr;
-}
-
-function processStringUnit(str) {
-  if (typeof(str) === "number") { // `str` is response to an earlier question
-    return textAnswers[str];
-  }
-  else // `str` is string
-    return str;
 }
 
 // Ask a question to user. The response is gathered in `optClicked`.
@@ -73,12 +79,12 @@ function ask(question) {
   els.buttons.innerHTML = ""; // Remove buttons
   
   // Show header
-  els.header.innerText = processArrString(question.text);
+  els.header.innerText = processString(question.text);
   
   // Show buttons
   if (question.type !== qtype.random)
     question.options.forEach(opt => {
-      showButton(opt.teleport, opt.text, question.textId);
+      showButton(opt.teleport, processString(opt.text), question.textId);
     });
   
   // Eventually show textbox

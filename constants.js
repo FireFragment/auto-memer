@@ -1,3 +1,5 @@
+const lang = "en";
+
 // Some DOM elements we will use
 const els = {
   header: document.getElementById("q-header"),
