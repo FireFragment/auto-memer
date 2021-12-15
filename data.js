@@ -2,7 +2,11 @@
 const textAnswersIds = {
   badEvent: 0,
   badEventResolution: 1,
-  badEventResolutionWrong: 2
+  badEventResolutionWrong: 2,
+  
+  human: 3,
+  badProp: 4,
+  whoIsBad: 5
 } 
 
 // The question flow.
@@ -10,8 +14,11 @@ const questions = {
   root: { // The flow begins with `root`.
     name: "root",
     type: qtype.random,
-    options: ["badEvent"]
+    options: ["badEvent", "human"]
   },
+  
+  // ------- PANIK-KALM-PANIK MEME -------
+  
   badEvent: {
     name: "badEvent",
     text: {
@@ -152,7 +159,14 @@ const questions = {
       {
         text: textAnswersIds.badEvent,
         teleport: "PANIC"
-      }
+      },
+      {
+        text: {
+          "en": "Approximately the same",
+          "cs": "Přibližně stejně špatné"
+        },
+        teleport: ["panikKalmPanik"]
+      },
     ]
   },
   panikKalmPanik: { 
@@ -164,5 +178,68 @@ const questions = {
       textAnswersIds.badEventResolution,
       textAnswersIds.badEventResolutionWrong
     ]
-  }
+  },
+  
+  // ------- REVEAL MEME -------  
+  
+  human: {
+    name: "human",
+    type: qtype.text,
+    textId: textAnswersIds.human,
+    options: [
+      {
+        teleport: ["whyIsBad"],
+        text: "OK"
+      }
+    ],
+    placeholder: {
+      cs: "Skupina lidí nebo konkrétní osoba",
+      en: "Group of people or just a concrete person"
+    },
+    text: {
+      cs: "Zadej jméno někoho, nebo skupinu lidí",
+      en: "Enter someone's name or some group of people"
+    }
+  },
+  whyIsBad: {
+    name: "whyIsBad",
+    type: qtype.text,
+    options: [
+      {
+        teleport: ["whoHasBadProp"],
+        text: "OK"
+      }
+    ],
+    text: {
+      cs: ["Jakými negativními vlastnostmi trpí ", textAnswersIds.human, "?"],
+      en: ["Which bad properties does ", textAnswersIds.human, " have?"]
+    },
+    textId: textAnswersIds.badProp
+  },
+  whoHasBadProp: {
+    name: "revealMeme",
+    type: qtype.text,
+    options: [
+      {
+        teleport: ["revealMeme"],
+        text: "OK"
+      }
+    ],
+    text: {
+      cs: ["Jak se říká lidem, kteří jsou ", textAnswersIds.badProp, "?"],
+      en: ["How are ", textAnswersIds.badProp, " people called?"]
+    },
+    textId: textAnswersIds.whoIsBad
+  },
+  revealMeme: { 
+    name: "revealMeme",
+    type: qtype.meme,
+    template: "reveal",
+    content: [
+      textAnswersIds.human,
+      "Let's see who you really are...",
+      textAnswersIds.whoIsBad,
+      "I knew it!"
+    ]
+  },
 }
