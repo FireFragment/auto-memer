@@ -47,7 +47,8 @@ const questions = {
           "en": "Yes",
           "cs": "Ano"
         },
-        teleport: ["howToCancel"]
+        teleport: ["howToCancel"],
+        primary: true
       },
       {
         text: {
@@ -86,7 +87,8 @@ const questions = {
           "en": "Yes",
           "cs": "Ano"
         },
-        teleport: ["howNotSoBad"]
+        teleport: ["howNotSoBad"],
+        primary: true
       },
       {
         text: "No",
@@ -122,7 +124,8 @@ const questions = {
           "en": "Yes",
           "cs": "Ano"
         },
-        teleport: ["howBadEventResolutionAgainstYou"]
+        teleport: ["howBadEventResolutionAgainstYou"],
+        primary: true
       },
       {
         text: "No",
@@ -165,7 +168,8 @@ const questions = {
           "en": "Approximately the same",
           "cs": "Přibližně stejně špatné"
         },
-        teleport: ["panikKalmPanik"]
+        teleport: ["panikKalmPanik"],
+        primary: true
       },
     ]
   },
@@ -192,10 +196,6 @@ const questions = {
         text: "OK"
       }
     ],
-    placeholder: {
-      cs: "Skupina lidí nebo konkrétní osoba",
-      en: "Group of people or just a concrete person"
-    },
     text: {
       cs: "Zadej jméno někoho, nebo skupinu lidí",
       en: "Enter someone's name or some group of people"
@@ -213,6 +213,10 @@ const questions = {
     text: {
       cs: ["Jakými negativními vlastnostmi trpí ", textAnswersIds.human, "?"],
       en: ["Which bad properties does ", textAnswersIds.human, " have?"]
+    },
+    placeholder: {
+      "en": "In form of adjective",
+      "cs": "Ve formě přídavného jména"
     },
     textId: textAnswersIds.badProp
   },

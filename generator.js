@@ -11,12 +11,21 @@ function askRandomOf(arr) {
 
 function createMeme(data) {
   els.result.src="http://api.memegen.link/images/" + data.template + "/" + data.content.map(txt => textAnswers[txt]).join("/") + ".png";
+  
+  els.resultLoad.style.display = "block";
+  els.result.addEventListener("load", event => {
+    els.resultLoad.style.display = "none";
+    els.result.style.display = "block";
+  });
 }
 
 // Show a button in options row.
-function showButton(id, text, textAnswerId) {
+function showButton(id, text, textAnswerId, accent) {
   var butt = document.createElement("button");
   butt.innerText = text;
+  console.log(accent);
+  if (accent)
+    butt.className = "accent";
   butt.onclick = function (){ 
     optClicked(id, textAnswerId); 
   };
@@ -76,29 +85,33 @@ function ask(question) {
     askRandomOf(question.options);
     return;
   }
+    
+  // Reset GUI
+  //els.result.style.display = "none"; // Hide meme
+  els.input.style.display = "none";  // Hide textbox
+  els.resultLoad.style.display = "none";
+  els.result.style.display = "none";
+  els.input.value = ""; // Empty textbox
+  els.buttons.innerHTML = ""; // Remove buttons
   
   if (question.type === qtype.meme) {
+    els.header.innerText = processString(strings.done);
     createMeme(question);
     return;
   }
-    
-  // Reset GUI
-  els.input.style.display = "none"; // Hide textbox
-  els.input.value = ""; // Empty textbox
-  els.buttons.innerHTML = ""; // Remove buttons
   
   // Show header
   els.header.innerText = processString(question.text);
   
   // Show buttons
-  if (question.type !== qtype.random)
-    question.options.forEach(opt => {
-      showButton(opt.teleport, processString(opt.text), question.textId);
-    });
+  question.options.forEach(opt => {
+    showButton(opt.teleport, processString(opt.text), question.textId, opt.primary);
+  });
   
   // Eventually show textbox
   if (question.type === qtype.text) {
     els.input.style.display = "inline";
+    els.input.placeholder = processString(question.placeholder);
     lastChangableQuestion = question;
   }
 }

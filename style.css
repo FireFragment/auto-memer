@@ -3,6 +3,10 @@
   margin-left: 4px;
 }
 
+body {
+  text-align: center;
+}
+
 main {
   display: flex;
   flex-direction: column;
