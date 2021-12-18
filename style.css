@@ -3,6 +3,22 @@
   margin-left: 4px;
 }
 
+#q-textfield {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#q-textfield * {
+  margin-top: 0;
+}
+
+#q-input {
+  flex-grow: 1;
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
 body {
   text-align: center;
 }

@@ -4,9 +4,13 @@ const lang = "en";
 const els = {
   header: document.getElementById("q-header"),
   buttons: document.getElementById("q-button-row"),
-  input: document.getElementById("q-input"),
   result: document.getElementById("result"),
-  resultLoad: document.getElementById("memeLoading")
+  resultLoad: document.getElementById("memeLoading"),
+  textfield: {
+    input: document.getElementById("q-input"),
+    prefix: document.getElementById("q-prefix"),
+    postfix: document.getElementById("q-postfix"),
+  }
 }
 
 // Types of questions

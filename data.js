@@ -26,6 +26,10 @@ const questions = {
       "cs": "Co nemáš rád, když se stane?"
     },
     type: qtype.text,
+    textPrefix: {
+      "en": "I don't like, when",
+      "cs": "Nemám rád, když"
+    },
     textId: textAnswersIds.badEvent,
     options: [
       {
@@ -103,6 +107,10 @@ const questions = {
       "cs": ["Jak může ", textAnswersIds.badEvent, " nebýt tak špatné, jak vypadalo na první pohled?"]
     },
     type: qtype.text,
+    textPrefix: {
+      "en": [textAnswersIds.badEvent, " isn't so bad, as it seemed at first glance, when "],
+      "cs": [textAnswersIds.badEvent, " není tak špatné, jak vypadalo na první pohled, když"]
+    },
     textId: textAnswersIds.badEventResolution,
     options: [
       {
@@ -208,6 +216,13 @@ const questions = {
       {
         teleport: ["whoHasBadProp"],
         text: "OK"
+      },
+      {
+        teleport: "PANIC",
+        text: {
+          en: "No idea",
+          cs: "Nic mě nenapadá"
+        }
       }
     ],
     text: {

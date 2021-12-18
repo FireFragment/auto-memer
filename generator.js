@@ -49,13 +49,14 @@ function optClicked(teleport, textAnswerId) {
     return;
   }
   if (textAnswerId !== undefined) { // The question is textual
-    textAnswers[textAnswerId] = els.input.value;
+    textAnswers[textAnswerId] = els.textfield.input.value;
   }
   askRandomOf(teleport);
 }
 
 // Convert the `text` item of questions to string
 function processString(str) {
+  
   var arr;
   
   switch (typeof(str)) {
@@ -67,7 +68,8 @@ function processString(str) {
       else                                  // `str` is translated to multiple languages
         return processString(str[lang]);  
       break;
-    default: console.error("str should not be type of " + typeof(str)); break;
+    case "undefined": return "";
+    default: console.error("Argument of processString() should not be type of " + typeof(str)); break;
   }
   
   var resultStr = "";
@@ -79,19 +81,21 @@ function processString(str) {
 
 // Ask a question to user. The response is gathered in `optClicked`.
 function ask(question) {
+  console.log("Asking: ");
+  console.log(question);
+  console.log(textAnswers);
   // Eventually go to random option
   if (question.type === qtype.random) {
-    // We already tried all options and user's respones weren't good for making a meme
     askRandomOf(question.options);
     return;
   }
     
   // Reset GUI
   //els.result.style.display = "none"; // Hide meme
-  els.input.style.display = "none";  // Hide textbox
+  els.textfield.input.style.display = "none";  // Hide textbox
   els.resultLoad.style.display = "none";
   els.result.style.display = "none";
-  els.input.value = ""; // Empty textbox
+  els.textfield.input.value = ""; // Empty textbox
   els.buttons.innerHTML = ""; // Remove buttons
   
   if (question.type === qtype.meme) {
@@ -101,7 +105,9 @@ function ask(question) {
   }
   
   // Show header
-  els.header.innerText = processString(question.text);
+  els.header.innerText            = processString(question.text);
+  els.textfield.prefix.innerText  = processString(question.textPrefix);
+  els.textfield.postfix.innerText = processString(question.textPostfix);
   
   // Show buttons
   question.options.forEach(opt => {
@@ -110,8 +116,8 @@ function ask(question) {
   
   // Eventually show textbox
   if (question.type === qtype.text) {
-    els.input.style.display = "inline";
-    els.input.placeholder = processString(question.placeholder);
+    els.textfield.input.style.display = "inline";
+    els.textfield.input.placeholder = processString(question.placeholder);
     lastChangableQuestion = question;
   }
 }
