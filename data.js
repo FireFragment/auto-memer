@@ -6,15 +6,60 @@ const textAnswersIds = {
   
   human: 3,
   badProp: 4,
-  whoIsBad: 5
+  whoIsBad: 5,
+  
+  misconception: 6,
+  whoSpreadsChaos: 7,
+  whoKnowsTruth: 8
 } 
+
+// Returns options for Yes/No questions
+function YesNoOpts(tpYes, tpNo) {
+  if (tpNo === undefined)
+    tpNo = "PANIC"
+  return [    
+    {
+      text: {
+        "en": "Yes",
+        "cs": "Ano"
+      },
+      teleport: tpYes,
+      primary: true
+    },
+    {
+      text: {
+        "en": "No",
+        "cs": "Ne"
+      },
+      teleport: tpNo
+    }
+  ];
+}
+
+// Returns options for text questions
+function TextOpts(teleport) {
+  return [    
+    {
+      text: "OK",
+      teleport: teleport,
+      primary: true
+    },
+    {
+      text: {
+        "en": "No idea",
+        "cs": "Nic mě nenapadá"
+      },
+      teleport: "PANIC"
+    }
+  ];
+}
 
 // The question flow.
 const questions = {
   root: { // The flow begins with `root`.
     name: "root",
     type: qtype.random,
-    options: ["badEvent", "human"]
+    options: ["badEvent", "human", "misconception"]
   },
   
   // ------- PANIK-KALM-PANIK MEME -------
@@ -85,20 +130,7 @@ const questions = {
       "cs": ["Může se nakonec ukázat, že ", textAnswersIds.badEvent, " není tak špatné, jak vypadalo na první pohled?"],
     },
     type: qtype.choice,
-    options: [
-      {
-        text: {
-          "en": "Yes",
-          "cs": "Ano"
-        },
-        teleport: ["howNotSoBad"],
-        primary: true
-      },
-      {
-        text: "No",
-        teleport: "PANIC"
-      },
-    ]
+    options: YesNoOpts(["howNotSoBad"])
   },  
   howNotSoBad: { 
     name: "howNotSoBad",
@@ -126,20 +158,7 @@ const questions = {
       "cs": ["Může se to, že ", textAnswersIds.badEventResolution, " obrátit proti tobě?"]
     },
     type: qtype.choice,
-    options: [
-      {
-        text: {
-          "en": "Yes",
-          "cs": "Ano"
-        },
-        teleport: ["howBadEventResolutionAgainstYou"],
-        primary: true
-      },
-      {
-        text: "No",
-        teleport: "PANIC"
-      }
-    ]
+    options: YesNoOpts(["howBadEventResolutionAgainstYou"])
   },
   howBadEventResolutionAgainstYou: { 
     name: "howBadEventResolutionAgainstYou",
@@ -212,19 +231,7 @@ const questions = {
   whyIsBad: {
     name: "whyIsBad",
     type: qtype.text,
-    options: [
-      {
-        teleport: ["whoHasBadProp"],
-        text: "OK"
-      },
-      {
-        teleport: "PANIC",
-        text: {
-          en: "No idea",
-          cs: "Nic mě nenapadá"
-        }
-      }
-    ],
+    options: TextOpts(["whoHasBadProp"]),
     text: {
       cs: ["Jakými negativními vlastnostmi trpí ", textAnswersIds.human, "?"],
       en: ["Which bad properties does ", textAnswersIds.human, " have?"]
@@ -259,6 +266,92 @@ const questions = {
       "Let's see who you really are...",
       textAnswersIds.whoIsBad,
       "I knew it!"
+    ]
+  },
+  
+  // ------- DOG MEME -------
+  
+  misconception: {
+    name: "misconception",
+    type: qtype.text,
+    options: [
+      {
+        teleport: ["spreadsSomeoneChaos"],
+        text: "OK"
+      }
+    ],
+    text: {
+      cs: "Zadej rozšířenou lež.",
+      en: "Enter some common misconception."
+    },
+    textId: textAnswersIds.misconception
+  },  
+  spreadsSomeoneChaos: {
+    name: "spreadsSomeoneChaos",
+    type: qtype.choice,
+    options: YesNoOpts(["whoSpreadsChaos"]),
+    text: {
+      cs: ["Šíří to, že ", textAnswersIds.misconception, " nějaký specifický člověk / skupina lidí?"],
+      en: ["Spreads the lie, that ", textAnswersIds.misconception, " some specific human / group of people?"]
+    },
+  },
+  whoSpreadsChaos: {
+    name: "whoSpreadsChaos",
+    type: qtype.text,
+    options: [
+      {
+        teleport: ["whoKnowsTruth", "profKnowsTruth"],
+        text: "OK"
+      }
+    ],
+    text: {
+      cs: ["Kdo šíří to, že ", textAnswersIds.misconception, "?"],
+      en: ["Who spreads the lie, that ", textAnswersIds.misconception, "?"]
+    },
+    textId: textAnswersIds.whoSpreadsChaos
+  },
+  profKnowsTruth: {
+    name: "profKnowsTruth",
+    type: qtype.text,
+    options: TextOpts(["dogMeme"]),
+    text: {
+      cs: ["Která profese se zabývá problematikou související s vyvracením toho, že ", textAnswersIds.misconception, "?"],
+      en: ["Which profession deals with the issue of refuting the fact that ", textAnswersIds.misconception, "?"]
+    },
+    textId: textAnswersIds.whoKnowsTruth
+  },
+  whoKnowsTruth: {
+    name: "whoKnowsTruth",
+    type: qtype.text,
+    options: TextOpts(["dogMeme"]),
+    placeholder: {
+      cs: "Třeba aktivista, skupina aktivistů, instituce...",
+      en: "Eg. activist, group of activists, institution..."
+    },
+    text: {
+      cs: ["Kdo bojuje proti šíření toho, že ", textAnswersIds.misconception, "?"],
+      en: ["Who fights against spreading the lie, that ", textAnswersIds.misconception, "?"]
+    },
+    textId: textAnswersIds.whoKnowsTruth
+  },
+  dogMeme: { 
+    name: "dogMeme",
+    type: qtype.meme,
+    template: "mouth",
+    content: [
+      [
+        textAnswersIds.whoSpreadsChaos, 
+        {
+          en: " explaining, that ", 
+          cs: " vysvětlující, že " 
+        },
+        textAnswersIds.misconception
+      ],
+      {
+        en: "Interested people",
+        cs: "Zaujatí lidé"
+      },
+      textAnswersIds.whoKnowsTruth,
     ]
   },
 }
