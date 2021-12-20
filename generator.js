@@ -10,7 +10,9 @@ function askRandomOf(arr) {
 };
 
 function createMeme(data) {
-  els.result.src="http://api.memegen.link/images/" + data.template + "/" + data.content.map(txt => textAnswers[txt]).join("/") + ".png";
+  console.log("Data");
+  console.log(data);
+  els.result.src="http://api.memegen.link/images/" + data.template + "/" + data.content.map(txt => processString(txt)).join("/") + ".png";
   
   els.resultLoad.style.display = "block";
   els.result.addEventListener("load", event => {
