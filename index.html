@@ -17,19 +17,33 @@
       Just answer a few simple questions and this generator makes a meme from your responses!
     </header>
     
-    <main id="question">
-      <h2 id="q-header"></h2>
-      <div id="q-textfield">
-        <span id="q-prefix"></span> <!-- Prefix -->
-        <input style="display: none" id="q-input">
-        <span id="q-postfix"></span> <!-- Postfix -->
+    <main>
+      <div id="question">
+        <h2 id="q-header"></h2>
+        <div id="q-textfield">
+          <span id="q-prefix"></span> <!-- Prefix -->
+          <input style="display: none" id="q-input">
+          <span id="q-postfix"></span> <!-- Postfix -->
+        </div>
+        <span id="q-button-row"></div>
       </div>
-      <span id="q-button-row"></div>
+      <div id="memeLoading">Generating the meme...</div>
+      <img id="result"></div>
+      
+      <hr style="margin-top: 32px; margin-bottom: 32px">
+      
+      <div class="lang-picker">
+        <b>Generator language:</b>
+        <div class="inline-opts" id="lang-picker">
+          <div id="lang-en" onclick="setLang('en')" class="selected">English</div>
+          <div id="lang-cs" onclick="setLang('cs')">Czech</div>
+        </div>
+      </div>
+      <div>This changes just the language of the generator, not of the entire website.</div>
+      
     </main>
-    <div id="memeLoading">Generating the meme...</div>
-    <img id="result"></div>
-
-    <footer></footer>
+    <footer>
+    </footer>
     </script>
   </body>
 </html>

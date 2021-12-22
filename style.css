@@ -1,3 +1,16 @@
+main {
+  margin: 8px;
+}
+
+.lang-picker {
+  display: flex;
+  flex-direction: row;
+}
+
+.inline-opts > * {
+  margin-top: 0;
+}
+
 #q-button-row * {
   margin-right: 4px;
   margin-left: 4px;
@@ -19,11 +32,7 @@
   margin-right: 16px;
 }
 
-body {
-  text-align: center;
-}
-
-main {
+#question {
   display: flex;
   flex-direction: column;
   justify-content: center;

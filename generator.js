@@ -1,7 +1,22 @@
+var lang = "en";
 var textAnswers = {}
 var changableQuestionsQueue = [];
+var currentlyAsked = questions.root; // Question currently displayed on screen
 
 ask(questions.root); // Ask the first question
+
+function setLang(_lang) {
+  lang = _lang;
+  
+  // Highlight the selected language
+  Array.from(els.langPicker.children).forEach(
+    el => el.classList.remove("selected")
+  );
+  els.lang[lang].className = "selected";
+  
+  // Re-ask currently asked question to apply language change immediately
+  ask(currentlyAsked);
+}
 
 // Ask a random question from the array.
 function askRandomOf(arr) {
@@ -10,8 +25,6 @@ function askRandomOf(arr) {
 };
 
 function createMeme(data) {
-  console.log("Data");
-  console.log(data);
   els.result.src="http://api.memegen.link/images/" + data.template + "/" + data.content.map(txt => processString(txt)).join("/") + ".png";
   
   els.resultLoad.style.display = "block";
@@ -25,7 +38,6 @@ function createMeme(data) {
 function showButton(id, text, textAnswerId, accent) {
   var butt = document.createElement("button");
   butt.innerText = text;
-  console.log(accent);
   if (accent)
     butt.className = "accent";
   butt.onclick = function (){ 
@@ -83,9 +95,9 @@ function processString(str) {
 
 // Ask a question to user. The response is gathered in `optClicked`.
 function ask(question) {
-  console.log("Asking: ");
-  console.log(question);
-  console.log(textAnswers);
+  
+  currentlyAsked = question;
+  
   // Eventually go to random option
   if (question.type === qtype.random) {
     askRandomOf(question.options);
