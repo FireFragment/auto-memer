@@ -3,6 +3,12 @@ var textAnswers = {}
 var changableQuestionsQueue = [];
 var currentlyAsked = questions.root; // Question currently displayed on screen
 
+els.result.addEventListener("load", event => {
+  els.resultLoad.style.display = "none";
+  els.result.style.display = "block";
+  showButton("PANIC", "Generate next meme", undefined, true);
+});
+
 ask(questions.root); // Ask the first question
 
 function setLang(_lang) {
@@ -28,11 +34,6 @@ function createMeme(data) {
   els.result.src="http://api.memegen.link/images/" + data.template + "/" + data.content.map(txt => processString(txt)).join("/") + ".png";
   
   els.resultLoad.style.display = "block";
-  els.result.addEventListener("load", event => {
-    els.resultLoad.style.display = "none";
-    els.result.style.display = "block";
-    showButton("PANIC", "Generate next meme", undefined, true);
-  });
 }
 
 // Show a button in options row.
