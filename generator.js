@@ -31,6 +31,7 @@ function createMeme(data) {
   els.result.addEventListener("load", event => {
     els.resultLoad.style.display = "none";
     els.result.style.display = "block";
+    showButton("PANIC", "Generate next meme", undefined, true);
   });
 }
 
@@ -110,7 +111,7 @@ function ask(question) {
   els.resultLoad.style.display = "none";
   els.result.style.display = "none";
   els.textfield.input.value = ""; // Empty textbox
-  els.buttons.innerHTML = ""; // Remove buttons
+  els.buttons.textContent = ""; // Remove buttons
   
   if (question.type === qtype.meme) {
     els.header.innerText = processString(strings.done);
