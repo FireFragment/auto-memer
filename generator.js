@@ -3,6 +3,12 @@ var textAnswers = {}
 var changableQuestionsQueue = [];
 var currentlyAsked = questions.root; // Question currently displayed on screen
 
+els.result.addEventListener("load", event => {
+  els.resultLoad.style.display = "none";
+  els.result.style.display = "block";
+  showButton("PANIC", processString(strings.continue), undefined, true);
+});
+
 ask(questions.root); // Ask the first question
 
 function setLang(_lang) {
@@ -105,7 +111,6 @@ function ask(question) {
   }
     
   // Reset GUI
-  //els.result.style.display = "none"; // Hide meme
   els.textfield.input.style.display = "none";  // Hide textbox
   els.resultLoad.style.display = "none";
   els.result.style.display = "none";

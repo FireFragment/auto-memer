@@ -28,5 +28,9 @@ const strings = {
   done: {
     "en": "You're done!",
     "cs": "Hotovo!"
+  },
+  continue: {
+    "en": "Generate next meme",
+    "cs": "Vygenerovat další meme"
   }
 }
