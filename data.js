@@ -274,12 +274,7 @@ const questions = {
   misconception: {
     name: "misconception",
     type: qtype.text,
-    options: [
-      {
-        teleport: ["spreadsSomeoneChaos"],
-        text: "OK"
-      }
-    ],
+    options: TextOpts(["spreadsSomeoneChaos"]),
     text: {
       cs: "Zadej rozšířenou lež.",
       en: "Enter some common misconception."
