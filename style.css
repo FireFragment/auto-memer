@@ -48,3 +48,10 @@
 main * {
   margin-top: 8px;
 }
+
+
+iframe {
+  width: 100vw;
+  border: none;
+  height: 50vh;
+}

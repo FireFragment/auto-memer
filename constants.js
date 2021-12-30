@@ -13,6 +13,10 @@ const els = {
   lang: {
     en: document.getElementById("lang-en"),
     cs: document.getElementById("lang-cs")
+  },
+  iframe: {
+    inner: document.getElementById("iframe"),
+    outer: document.getElementById("iframe-outer")
   }
 }
 

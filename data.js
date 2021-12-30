@@ -10,7 +10,12 @@ const textAnswersIds = {
   
   misconception: 6,
   whoSpreadsChaos: 7,
-  whoKnowsTruth: 8
+  whoKnowsTruth: 8,
+  
+  acronym: 9,
+  meaning: 10,
+  altMeaning: 11,
+  altMeaning2: 12
 } 
 
 // Returns options for Yes/No questions
@@ -59,7 +64,7 @@ const questions = {
   root: { // The flow begins with `root`.
     name: "root",
     type: qtype.random,
-    options: ["badEvent", "human", "misconception"]
+    options: ["badEvent", "human", "misconception", "acronym"]
   },
   
   // ------- PANIK-KALM-PANIK MEME -------
@@ -349,4 +354,84 @@ const questions = {
       textAnswersIds.whoKnowsTruth,
     ]
   },
+  
+  // ----- PERFECTION -----
+  
+  acronym: {
+    name: "acronym",
+    type: qtype.text,
+    options: TextOpts(["meaning"]),
+    text: {
+      cs: "Zadej nějakou zkratku",
+      en: "Enter some acronym"
+    },
+    placeholder: {
+      en: "Try to enter short acronym, long ideally 3 letters or less",
+      cs: "Pokuste se přijít na nějakou krátkou, dlouhou ideálně 3 písmena nebo méně"
+    },
+    textId: textAnswersIds.acronym,
+    preload: {
+      en: ["https://en.wikipedia.org/wiki/", , textAnswersIds.acronym, "_(disambiguation)"],
+      cs: ["https://cs.wikipedia.org/wiki/ ", textAnswersIds.acronym, "_(rozcestník)"]
+    }
+  },
+  meaning: {
+    name: "meaning",
+    type: qtype.text,
+    options: TextOpts(["altMeaning"]),
+    text: {
+      cs: ["Co znamená ", textAnswersIds.acronym, "?"],
+      en: ["What does ", textAnswersIds.acronym, " mean?"]
+    },
+    textId: textAnswersIds.meaning
+  },
+  altMeaning: {
+    name: "altMeaning",
+    type: qtype.text,
+    options: TextOpts(["altMeaning2"]),
+    placeholder: {
+      en: "Enter it here",
+      cs: "Zadejte ho sem"
+    },
+    text: {
+      cs: ["Má ", textAnswersIds.acronym, " nějaký jiný význam, než ", textAnswersIds.meaning, "?"],
+      en: ["Does ", textAnswersIds.acronym, " have some other meaning, than ", textAnswersIds.meaning, "?"]
+    },
+    page: {
+      en: ["https://en.wikipedia.org/wiki/", , textAnswersIds.acronym, "_(disambiguation)"],
+      cs: ["https://cs.wikipedia.org/wiki/ ", textAnswersIds.acronym, "_(rozcestník)"]
+    },
+    textId: textAnswersIds.altMeaning
+  },
+  altMeaning2: {
+    name: "altMeaning2",
+    type: qtype.text,
+    options: TextOpts(["perfectionMeme"]),
+    text: {
+      cs: ["Má ", textAnswersIds.acronym, " nějaký jiný význam, než ", textAnswersIds.meaning, " a " , textAnswersIds.altMeaning, "?"],
+      en: ["Does ", textAnswersIds.acronym, " have some other meaning, than ", textAnswersIds.meaning, " and " , textAnswersIds.altMeaning, "?"]
+    },
+    placeholder: {
+      en: "Enter it here",
+      cs: "Zadejte ho sem"
+    },
+    page: {
+      en: ["https://en.wikipedia.org/wiki/", , textAnswersIds.acronym, "_(disambiguation)"],
+      cs: ["https://cs.wikipedia.org/wiki/ ", textAnswersIds.acronym, "_(rozcestník)"]
+    },
+    textId: textAnswersIds.altMeaning2
+  },
+  perfectionMeme: { 
+    name: "perfectionMeme",
+    type: qtype.meme,
+    template: "perfection",
+    content: [
+      textAnswersIds.meaning,
+      ["I prefer the real ", textAnswersIds.acronym],
+      textAnswersIds.altMeaning,
+      ["I said the real ", textAnswersIds.acronym],
+      textAnswersIds.altMeaning2,
+      "Perfection"
+    ]
+  }
 }

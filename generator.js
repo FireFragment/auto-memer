@@ -111,11 +111,21 @@ function ask(question) {
   }
     
   // Reset GUI
+  els.iframe.outer.style.display = "none"; // Hide iframe
   els.textfield.input.style.display = "none";  // Hide textbox
   els.resultLoad.style.display = "none";
   els.result.style.display = "none";
   els.textfield.input.value = ""; // Empty textbox
   els.buttons.innerHTML = ""; // Remove buttons
+  
+  // Iframe
+  if (question.preload) {
+    els.iframe.outer.style.src = question.preload;
+  }
+  if (question.page) {
+    els.iframe.outer.style.display = "block";
+    els.iframe.inner.src = processString(question.page);
+  } 
   
   if (question.type === qtype.meme) {
     els.header.innerText = processString(strings.done);
