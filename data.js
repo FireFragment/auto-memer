@@ -3,6 +3,8 @@
 Here is defined the logic of the generator.
 It's parsed and "interpreted" in `generator.js`
 
+TODO: Remove all `primary` properties, does not work since 6ec94edc2bb1aae0d0f8fcb1cb0c3669b95d5a53
+
 */
 
 // IDs of answers to text questions
