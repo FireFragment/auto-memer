@@ -1,3 +1,10 @@
+/*
+
+Here is defined the logic of the generator.
+It's parsed and "interpreted" in `generator.js`
+
+*/
+
 // IDs of answers to text questions
 const textAnswersIds = {
   badEvent: 0,
@@ -176,33 +183,8 @@ const questions = {
     options: [
       {
         text: "OK",
-        teleport: ["isResolutionWorse"]
-      }
-    ]
-  },
-  isResolutionWorse: {
-    name: "isResolutionWorse",
-    text: {
-      "en": "From following options, what is worse?",
-      "cs": "Co z následujících možností je horší?"
-    },
-    options: [
-      {
-        text: textAnswersIds.badEventResolutionWrong,
         teleport: ["panikKalmPanik"]
-      },
-      {
-        text: textAnswersIds.badEvent,
-        teleport: "PANIC"
-      },
-      {
-        text: {
-          "en": "Approximately the same",
-          "cs": "Přibližně stejně špatné"
-        },
-        teleport: ["panikKalmPanik"],
-        primary: true
-      },
+      }
     ]
   },
   panikKalmPanik: { 

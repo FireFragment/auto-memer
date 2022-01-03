@@ -1,3 +1,10 @@
+/*
+ 
+This code reads `data.js` and asks questions in there.
+For logic of the generator, see `data.js`
+
+*/
+
 var lang = "en";
 var textAnswers = {}
 var changableQuestionsQueue = [];
