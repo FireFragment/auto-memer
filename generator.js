@@ -120,6 +120,7 @@ function ask(question) {
   // Reset GUI
   els.iframe.outer.style.display = "none"; // Hide iframe
   els.textfield.input.style.display = "none";  // Hide textbox
+  els.grayWarning.style.display = "none";  // Hide gray buttons warning
   els.resultLoad.style.display = "none";
   els.result.style.display = "none";
   els.textfield.input.value = ""; // Empty textbox
@@ -148,7 +149,11 @@ function ask(question) {
   // Show buttons
   question.options.forEach(opt => {
     showButton(opt.teleport, processString(opt.text), question.textId, opt.teleport != "PANIC");
+    if (opt.teleport == "PANIC") 
+      els.grayWarning.style.display = "block";
   });
+  
+  els.grayWarning.innerHTML = processString(strings.grayWarning);
   
   // Eventually show textbox
   if (question.type === qtype.text) {

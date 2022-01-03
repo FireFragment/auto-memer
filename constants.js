@@ -17,7 +17,8 @@ const els = {
   iframe: {
     inner: document.getElementById("iframe"),
     outer: document.getElementById("iframe-outer")
-  }
+  },
+  grayWarning: document.getElementById("gray-warning")
 }
 
 // Types of questions
@@ -36,5 +37,9 @@ const strings = {
   continue: {
     "en": "Generate next meme",
     "cs": "Vygenerovat další meme"
+  },
+  grayWarning: {
+    "en": "<b>Warning: </b>If you press some of gray buttons, you will be returned back and the meme generation will take longer time!",
+    "cs": "<b>Varování: </b>Pokud stisknete některé z šedých tlačítek, budete vráceni zpět a generace potrvá déle!"
   }
 }
