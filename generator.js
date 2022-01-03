@@ -147,7 +147,7 @@ function ask(question) {
   
   // Show buttons
   question.options.forEach(opt => {
-    showButton(opt.teleport, processString(opt.text), question.textId, opt.primary);
+    showButton(opt.teleport, processString(opt.text), question.textId, opt.teleport != "PANIC");
   });
   
   // Eventually show textbox
